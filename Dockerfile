@@ -15,7 +15,8 @@ COPY . /var/www/html/
 WORKDIR /var/www/html/
 
 # Ejecutar Composer
-RUN composer update --ignore-platform-reqs
+# Eliminar rastros viejos y forzar la instalacion de la version 1.18+
+RUN rm -rf vendor composer.lock && composer require mongodb/mongodb:^1.18.0 --ignore-platform-reqs
 
 # Exponer el puerto de Apache
 EXPOSE 80
