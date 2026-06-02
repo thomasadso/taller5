@@ -2,10 +2,17 @@
 require 'vendor/autoload.php'; // Carga Composer
 
 // CONEXIÓN POSTGRESQL (PDO)
-$pg_url = "postgresql://registro_estudiantes_user:PVlxDGwqF8Pt6hm9d9KzT9C0iIndg5Xz@dpg-d8f29e6gvqtc738qnl1g-a.ohio-postgres.render.com/registro_estudiantes";
+$host = "dpg-d8f29e6gvqtc738qnl1g-a.ohio-postgres.render.com";
+$dbname = "registro_estudiantes";
+$user = "registro_estudiantes_user";
+$password = "PVlxDGwqF8Pt6hm9d9KzT9C0iIndg5Xz";
+
 try {
-    $pdo = new PDO($pg_url);
+    // Aquí usamos la sintaxis exacta que PDO exige: pgsql:host=...
+    $dsn = "pgsql:host=$host;port=5432;dbname=$dbname";
+    $pdo = new PDO($dsn, $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
     // Crea la tabla si no existe
     $pdo->exec("CREATE TABLE IF NOT EXISTS estudiantes (id SERIAL PRIMARY KEY, nombre VARCHAR(100), correo VARCHAR(100))");
 } catch (PDOException $e) {
