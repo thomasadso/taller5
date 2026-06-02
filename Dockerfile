@@ -15,7 +15,7 @@ COPY . /var/www/html/
 WORKDIR /var/www/html/
 
 # Ejecutar Composer
-RUN composer install --ignore-platform-reqs
+RUN composer update --ignore-platform-reqs
 
 # Exponer el puerto de Apache
 EXPOSE 80
