@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Postgres
-    $stmt = $pdo->prepare("INSERT INTO estudiantes (nombre, correo, fecha) VALUES (?, ?, NOW())");
+    $stmt = $pdo->prepare("INSERT INTO estudiantes (nombre, correo, fecha) VALUES (?, ?, CURRENT_TIMESTAMP)");
     $stmt->execute([$data['nombre'], $data['correo']]);
         
         // Mongo
